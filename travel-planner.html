@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Travel Planner | You Are AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Generator Styling - Dark Mode Adaptation */
+        .glass-panel {
+            background-color: rgba(15, 15, 16, 0.8); /* 半透明黑 */
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .input-group { margin-bottom: 25px; text-align: left; }
+        .input-group label { display: block; margin-bottom: 10px; font-weight: bold; color: var(--accent-color); font-size: 1.05rem; }
+        
+        /* 輸入框樣式 */
+        .input-group input[type="text"], .input-group select { 
+            width: 100%; padding: 14px; 
+            border: 1px solid #333; 
+            border-radius: 8px; font-size: 1rem; font-family: inherit; 
+            background-color: #1a1a1a; color: white;
+            transition: border-color 0.2s; 
+        }
+        .input-group input:focus, .input-group select:focus { outline: none; border-color: var(--accent-color); }
+        
+        .tags-container { display: flex; flex-wrap: wrap; gap: 10px; }
+        .tags-container input[type="checkbox"] { display: none; }
+        .tag-label { 
+            display: inline-block; padding: 10px 16px; 
+            background-color: #27272a; color: #a1a1aa; 
+            border-radius: 50px; font-size: 0.95rem; cursor: pointer; 
+            border: 1px solid #3f3f46; transition: all 0.2s ease; user-select: none; 
+        }
+        .tag-label:hover { background-color: #3f3f46; color: white; }
+        .tags-container input[type="checkbox"]:checked + .tag-label { 
+            background-color: rgba(59, 130, 246, 0.2); 
+            color: var(--accent-color); 
+            border-color: var(--accent-color); 
+            font-weight: bold; 
+        }
+
+        .generate-btn { 
+            background: linear-gradient(135deg, var(--accent-color), #2563eb); 
+            color: white; border: none; padding: 16px 24px; 
+            border-radius: 50px; font-size: 1.1rem; cursor: pointer; 
+            width: 100%; font-weight: bold; margin-top: 20px;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            transition: transform 0.2s;
+        }
+        .generate-btn:hover { transform: translateY(-2px); }
+
+        .result-area { margin-top: 30px; display: none; background-color: #000; border: 1px solid #333; color: #00FF9C; padding: 25px; border-radius: 12px; }
+        .result-text { font-family: 'Courier New', monospace; white-space: pre-wrap; margin-bottom: 20px; line-height: 1.6; font-size: 0.95rem; }
+    </style>
+</head>
+<body>
+
+    <div class="orbs-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">You Are AI</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="updates.html">Updates</a></li>
+            <li><a href="topics.html">Topics</a></li>
+            <li><a href="prompts.html">Library</a></li>
+        </ul>
+    </nav>
+
+    <div class="container" style="text-align: left; max-width: 800px;">
+        
+        <header style="margin-bottom: 40px; padding-top: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+            <span class="tag social" style="background-color: rgba(4, 120, 87, 0.2); color: #34d399;">Advanced Tool</span>
+            <h1 class="reveal-on-scroll" style="margin-top: 10px; font-size: 2.2rem;">30-Second AI Travel Planner</h1>
+            <p class="reveal-on-scroll" style="color: var(--text-muted); margin-top: 10px;">Plan the perfect trip with customized itineraries, map links, and budget tips.</p>
+        </header>
+
+        <article class="glass-panel reveal-on-scroll">
+            <p style="margin-bottom: 20px;">Planning a trip—especially for a group or with family—can be a logistical nightmare. Use this generator to create a professional "Super Prompt" for Gemini.</p>
+            
+            <div style="margin-top: 30px;">
+                <h3 style="margin-bottom: 25px; color: white;">✈️ Build Your Itinerary</h3>
+                
+                <div class="input-group">
+                    <label>🌍 Destination (Country)</label>
+                    <select id="country-select" onchange="toggleCustomInput('country')">
+                        <option value="Japan">🇯🇵 Japan</option>
+                        <option value="Korea">🇰🇷 Korea</option>
+                        <option value="Taiwan">🇹🇼 Taiwan</option>
+                        <option value="Thailand">🇹🇭 Thailand</option>
+                        <option value="UK">🇬🇧 UK</option>
+                        <option value="France">🇫🇷 France</option>
+                        <option value="USA">🇺🇸 USA</option>
+                        <option value="custom">🏳️ Other (Custom)...</option>
+                    </select>
+                    <input type="text" id="country-custom" style="display:none; margin-top:10px;" placeholder="Enter country name...">
+                </div>
+
+                <div class="input-group">
+                    <label>📍 Specific City (Optional)</label>
+                    <input type="text" id="city" placeholder="e.g., Tokyo, Seoul, London...">
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div class="input-group">
+                        <label>📅 Duration</label>
+                        <select id="days">
+                            <option value="3 Days">3 Days</option>
+                            <option value="5 Days" selected>5 Days</option>
+                            <option value="7 Days">7 Days</option>
+                            <option value="10 Days">10 Days</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>💰 Budget</label>
+                        <select id="budget">
+                            <option value="Budget">Budget</option>
+                            <option value="Standard" selected>Standard</option>
+                            <option value="Luxury">Luxury</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>❤️ Preferences</label>
+                    <div class="tags-container">
+                        <label><input type="checkbox" name="pref" value="Local Foodie"> <span class="tag-label">🍜 Foodie</span></label>
+                        <label><input type="checkbox" name="pref" value="Photo Spots"> <span class="tag-label">📸 Photos</span></label>
+                        <label><input type="checkbox" name="pref" value="Shopping"> <span class="tag-label">🛍️ Shopping</span></label>
+                        <label><input type="checkbox" name="pref" value="History"> <span class="tag-label">🏛️ History</span></label>
+                    </div>
+                </div>
+
+                <button onclick="generateTravelPrompt()" class="generate-btn">✨ Generate Prompt</button>
+
+                <div id="result-box" class="result-area">
+                    <p style="margin-bottom: 10px; color: #94a3b8; font-size: 0.9rem;">Copy below into Google Gemini:</p>
+                    <div id="final-prompt" class="result-text"></div>
+                    <button onclick="copyGeneratedPrompt()" class="copy-btn">Copy Prompt</button>
+                </div>
+            </div>
+        </article>
+
+        <div style="margin-top: 50px; text-align: center;">
+            <a href="topics.html" class="shimmer-btn">Back to Topics</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2025 You Are AI. Empowering Humanity.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function toggleCustomInput(type) {
+            const selectElement = document.getElementById(type + '-select');
+            const customInput = document.getElementById(type + '-custom');
+            if (selectElement && selectElement.value === 'custom') {
+                customInput.style.display = 'block';
+                customInput.focus();
+            } else {
+                customInput.style.display = 'none';
+            }
+        }
+
+        function generateTravelPrompt() {
+            let country = document.getElementById('country-select').value;
+            if (country === 'custom') country = document.getElementById('country-custom').value;
+            const city = document.getElementById('city').value || country;
+            const duration = document.getElementById('days').value;
+            const budget = document.getElementById('budget').value;
+            
+            let selectedPrefs = [];
+            document.querySelectorAll('input[name="pref"]:checked').forEach((cb) => selectedPrefs.push(cb.value));
+            let prefs = selectedPrefs.length > 0 ? selectedPrefs.join(', ') : "General sightseeing";
+
+            let promptText = `Act as a professional tour guide. Plan a ${duration} trip to ${city} (${country}).\nBudget: ${budget}\nPreferences: ${prefs}\n\nRequirements:\n1. Output as a Markdown Table.\n2. Include Google Maps links for every spot.\n3. Suggest transport options.`;
+
+            document.getElementById('final-prompt').innerText = promptText;
+            document.getElementById('result-box').style.display = 'block';
+        }
+
+        function copyGeneratedPrompt() {
+            const text = document.getElementById('final-prompt').innerText;
+            navigator.clipboard.writeText(text).then(() => { alert("Prompt copied!"); });
+        }
+    </script>
+</body>
+</html>

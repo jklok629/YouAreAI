@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Library | You Are AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="orbs-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">You Are AI</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="updates.html">Updates</a></li>
+            <li><a href="topics.html">Topics</a></li>
+            <li><a href="prompts.html">Library</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1 class="reveal-on-scroll">Prompt Library</h1>
+        <p class="reveal-on-scroll" style="color: var(--text-muted);">Copy and paste these directly into ChatGPT, Gemini, or Claude.</p>
+        <br>
+
+        <div class="bento-grid">
+            <div class="tilt-card reveal-on-scroll">
+                <div class="tilt-inner">
+                    <h3>The Executive Assistant</h3>
+                    <p><strong>Best for:</strong> Organizing a chaotic task list.</p>
+                    <div class="code-block" style="margin-top: 15px; background: #000; border: 1px solid #333; padding: 15px; border-radius: 8px;">
+                        <p id="p1" style="color: #00FF9C; font-family: monospace; font-size: 0.9rem;">"Act as a professional executive assistant. Look at the following list of tasks and prioritize them using the Eisenhower Matrix..."</p>
+                    </div>
+                    <button onclick="copyToClipboard('p1')" class="copy-btn">Copy</button>
+                </div>
+            </div>
+
+            <div class="tilt-card reveal-on-scroll">
+                <div class="tilt-inner">
+                    <h3>The Email Polisher</h3>
+                    <p><strong>Best for:</strong> Making rude emails sound professional.</p>
+                    <div class="code-block" style="margin-top: 15px; background: #000; border: 1px solid #333; padding: 15px; border-radius: 8px;">
+                        <p id="p2" style="color: #00FF9C; font-family: monospace; font-size: 0.9rem;">"Rewrite this email to be professional, concise, and empathetic. Keep the tone formal but warm..."</p>
+                    </div>
+                    <button onclick="copyToClipboard('p2')" class="copy-btn">Copy</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2025 You Are AI.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // 簡單的複製功能 (針對此頁面特別 ID)
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Prompt copied!");
+            });
+        }
+    </script>
+</body>
+</html>

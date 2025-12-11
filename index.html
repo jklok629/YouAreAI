@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You Are AI | Command Center</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="orbs-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">You Are AI</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link active">Home</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="insights.html" class="nav-link">Insights</a></li>
+            <li><a href="academy.html" class="nav-link">Academy</a></li>
+            <li><a href="toolbox.html" class="nav-link">Toolbox</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a href="#" class="login-link">Log in</a>
+            <a href="#" class="signup-btn">Join Discord</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Unlock Your <span class="gradient-text-anim">Potential</span><br>with AI & Web3</h1>
+            <p style="min-height: 1.6em; color: #a1a1aa; font-size: 1.3rem;">
+                <span id="typing-text"></span><span class="typing-cursor">&nbsp;</span>
+            </p>
+            <a href="academy.html" class="shimmer-btn" style="margin-top: 20px;">Start Learning</a>
+        </div>
+    </header>
+    
+    <section class="container">
+        <h2 class="reveal-on-scroll">Featured Content</h2>
+        <div class="bento-grid">
+            <div class="tilt-card beam-card reveal-on-scroll">
+                <div class="beam-border"></div><div class="inner-cover"></div>
+                <div class="tilt-inner">
+                    <span class="tag social" style="background: rgba(4, 120, 87, 0.2); color: #34d399;">New Tool</span>
+                    <h4>AI Prompt Generator</h4>
+                    <p>Create perfect prompts for Midjourney and ChatGPT in seconds.</p>
+                    <a href="toolbox.html" style="color: var(--border-beam-color); font-weight: bold; text-decoration: none; margin-top: auto;">Try Beta &rarr;</a>
+                </div>
+            </div>
+            <div class="tilt-card reveal-on-scroll" style="transition-delay: 0.1s;">
+                <div class="tilt-inner">
+                    <span class="tag video">Analysis</span>
+                    <h4>Crypto Market Trends Q2</h4>
+                    <p>Deep dive into the latest token movements and what to expect next week.</p>
+                    <a href="insights.html" style="color: var(--accent-color); font-weight: bold; text-decoration: none; margin-top: auto;">Read Insights &rarr;</a>
+                </div>
+            </div>
+            <div class="tilt-card reveal-on-scroll" style="transition-delay: 0.2s;">
+                <div class="tilt-inner">
+                    <span class="tag video">Tutorial</span>
+                    <h4>Web3 for Beginners</h4>
+                    <p>Understanding wallets, gas fees, and basic security.</p>
+                    <a href="academy.html" style="color: var(--accent-color); font-weight: bold; text-decoration: none; margin-top: auto;">Watch Video &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2 class="reveal-on-scroll">Quick Access</h2>
+        <div class="bento-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+            <div class="tilt-card reveal-on-scroll" onclick="location.href='insights.html'">
+                <div class="tilt-inner" style="align-items: center; text-align: center;">
+                    <div class="quick-link-icon">📊</div>
+                    <h4>Crypto Analysis</h4>
+                </div>
+            </div>
+            <div class="tilt-card reveal-on-scroll" onclick="location.href='toolbox.html'">
+                <div class="tilt-inner" style="align-items: center; text-align: center;">
+                    <div class="quick-link-icon">🤖</div>
+                    <h4>AI Workflows</h4>
+                </div>
+            </div>
+            <div class="tilt-card reveal-on-scroll" onclick="location.href='academy.html'">
+                <div class="tilt-inner" style="align-items: center; text-align: center;">
+                    <div class="quick-link-icon">🎓</div>
+                    <h4>Tutorials</h4>
+                </div>
+            </div>
+            <div class="tilt-card reveal-on-scroll" onclick="location.href='toolbox.html'">
+                <div class="tilt-inner" style="align-items: center; text-align: center;">
+                    <div class="quick-link-icon">🛠️</div>
+                    <h4>Tools</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container reveal-on-scroll">
+        <div class="tilt-card beam-card" style="text-align: center; padding: 60px;">
+            <div class="beam-border"></div><div class="inner-cover"></div>
+            <div class="tilt-inner" style="align-items: center;">
+                <h2 style="margin-bottom: 20px;">Join the Community</h2>
+                <p style="max-width: 600px; margin: 0 auto 30px auto;">Connect with like-minded builders and traders. Get real-time signals and support.</p>
+                <a href="#" class="shimmer-btn">Join Discord / Telegram</a>
+            </div>
+        </div>
+    </section>
+
+    <footer><p>&copy; 2025 You Are AI.</p></footer>
+    <script src="script.js"></script>
+</body>
+</html>

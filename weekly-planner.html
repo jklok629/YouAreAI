@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Weekly Planner | You Are AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .glass-panel {
+            background-color: rgba(15, 15, 16, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 40px;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="orbs-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">You Are AI</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="updates.html">Updates</a></li>
+            <li><a href="topics.html">Topics</a></li>
+            <li><a href="prompts.html">Library</a></li>
+        </ul>
+    </nav>
+
+    <div class="container" style="text-align: left; max-width: 800px;">
+        
+        <header style="margin-bottom: 40px; padding-top: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+            <span class="tag video" style="background-color: rgba(30, 64, 175, 0.3); color: #93c5fd;">Guide</span>
+            <h1 class="reveal-on-scroll" style="margin-top: 10px; font-size: 2.5rem;">🤖 AI-Powered Weekly Planner: Setup Guide</h1>
+            <p class="reveal-on-scroll" style="color: var(--text-muted); margin-top: 10px;">Learn how to automate your weekly planning using Google Gemini and Sheets.</p>
+        </header>
+
+        <article class="glass-panel reveal-on-scroll">
+            
+            <p>Welcome! This guide is designed to help you work with Google Gemini to automate your weekly planning.</p>
+            <br>
+
+            <h3 style="color:white;">✅ Step 1: Connect the AI</h3>
+            <p>First, we need to make sure Gemini can "see" your files.</p>
+            <ul style="margin-left: 20px; margin-bottom: 20px; color: var(--text-muted);">
+                <li>Open <strong>Gemini</strong> in your browser.</li>
+                <li>Click <strong>Settings (⚙️) > Extensions</strong>.</li>
+                <li>Ensure the <strong>Google Workspace</strong> extension is turned <strong>ON</strong>.</li>
+            </ul>
+            <br>
+
+            <h3 style="color:white;">📝 Step 2: The Brain Dump</h3>
+            <p>Create a Google Sheet named "My Weekly Plan". List your tasks in a tab named "Tasks".</p>
+            <br>
+
+            <h3 style="color:white;">🪄 Step 3: The Magic Prompt</h3>
+            <div class="code-block" style="margin: 20px 0;">
+                <p id="planner-prompt" style="color: #00FF9C;">"I am working on the Google Sheet in my Drive named 'My Weekly Plan'. Look at the 'Tasks' tab. Plan my week by filling out the 'Schedule' tab using time blocking..."</p>
+                <button onclick="copyPlannerPrompt()" class="copy-btn">Copy Prompt</button>
+            </div>
+
+        </article>
+
+        <div style="margin-top: 50px; text-align: center;">
+            <a href="updates.html" class="shimmer-btn">Back to Updates</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2025 You Are AI. Empowering Humanity.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function copyPlannerPrompt() {
+            const text = document.getElementById("planner-prompt").innerText;
+            navigator.clipboard.writeText(text).then(() => { alert("Copied!"); });
+        }
+    </script>
+</body>
+</html>
