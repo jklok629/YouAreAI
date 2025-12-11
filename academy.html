@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Academy | You Are AI</title>
+    <link rel="icon" href="logo.png" type="image/png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="orbs-container"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
 
     <nav class="navbar">
-        <div class="logo">You Are AI</div>
+        <a href="index.html" class="logo-wrapper">
+            <img src="logo.png" alt="You Are AI Logo" class="logo-img">
+            <span class="logo-text">You Are AI</span>
+        </a>
         <ul class="nav-links">
             <li><a href="index.html" class="nav-link">Home</a></li>
             <li><a href="about.html" class="nav-link">About</a></li>
@@ -28,16 +32,15 @@
 
         <h2 class="reveal-on-scroll" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">🎓 AI Tutorials</h2>
         <div class="bento-grid" style="margin-top: 30px; margin-bottom: 50px;">
-            <div class="tilt-card beam-card reveal-on-scroll">
-                <div class="beam-border"></div><div class="inner-cover"></div>
+            <div class="static-card reveal-on-scroll">
                 <div class="tilt-inner">
                     <span class="tag video">Guide</span>
                     <h4>Midjourney Masterclass</h4>
                     <p>From zero to hero: Advanced prompting techniques.</p>
-                    <a href="#" style="color: var(--border-beam-color); margin-top: auto;">Watch Video &rarr;</a>
+                    <a href="#" style="color: var(--accent-color); margin-top: auto;">Watch Video &rarr;</a>
                 </div>
             </div>
-            <div class="tilt-card reveal-on-scroll">
+            <div class="static-card reveal-on-scroll">
                 <div class="tilt-inner">
                     <span class="tag video">Guide</span>
                     <h4>ChatGPT Automation</h4>
@@ -49,7 +52,7 @@
 
         <h2 class="reveal-on-scroll" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">⛓️ Web3 101</h2>
         <div class="bento-grid" style="margin-top: 30px;">
-            <div class="tilt-card reveal-on-scroll">
+            <div class="static-card reveal-on-scroll">
                 <div class="tilt-inner">
                     <span class="tag video">Basics</span>
                     <h4>Blockchain Fundamentals</h4>
@@ -60,7 +63,13 @@
         </div>
     </div>
 
-    <footer><p>&copy; 2025 You Are AI.</p></footer>
+    <footer>
+        <a href="index.html" class="logo-wrapper">
+            <img src="logo.png" alt="Logo" class="logo-img">
+            <span class="logo-text">You Are AI</span>
+        </a>
+        <p>&copy; 2025 You Are AI.</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>

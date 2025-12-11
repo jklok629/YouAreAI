@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>You Are AI | Command Center</title>
+    <link rel="icon" href="logo.png" type="image/png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,7 +16,10 @@
     </div>
 
     <nav class="navbar">
-        <div class="logo">You Are AI</div>
+        <a href="index.html" class="logo-wrapper">
+            <img src="logo.png" alt="You Are AI Logo" class="logo-img">
+            <span class="logo-text">You Are AI</span>
+        </a>
         <ul class="nav-links">
             <li><a href="index.html" class="nav-link active">Home</a></li>
             <li><a href="about.html" class="nav-link">About</a></li>
@@ -102,9 +106,9 @@
     </section>
 
     <section class="container reveal-on-scroll">
-        <div class="tilt-card beam-card" style="text-align: center; padding: 60px;">
+        <div class="static-card beam-card beam-blue" style="text-align: center; padding: 60px;">
             <div class="beam-border"></div><div class="inner-cover"></div>
-            <div class="tilt-inner" style="align-items: center;">
+            <div class="tilt-inner" style="align-items: center; width: 100%;">
                 <h2 style="margin-bottom: 20px;">Join the Community</h2>
                 <p style="max-width: 600px; margin: 0 auto 30px auto;">Connect with like-minded builders and traders. Get real-time signals and support.</p>
                 <a href="#" class="shimmer-btn">Join Discord / Telegram</a>
@@ -112,7 +116,13 @@
         </div>
     </section>
 
-    <footer><p>&copy; 2025 You Are AI.</p></footer>
+    <footer>
+        <a href="index.html" class="logo-wrapper">
+            <img src="logo.png" alt="Logo" class="logo-img">
+            <span class="logo-text">You Are AI</span>
+        </a>
+        <p>&copy; 2025 You Are AI.</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>

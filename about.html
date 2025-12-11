@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | You Are AI</title>
+    <link rel="icon" href="logo.png" type="image/png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="orbs-container"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
 
     <nav class="navbar">
-        <div class="logo">You Are AI</div>
+        <a href="index.html" class="logo-wrapper">
+            <img src="logo.png" alt="You Are AI Logo" class="logo-img">
+            <span class="logo-text">You Are AI</span>
+        </a>
         <ul class="nav-links">
             <li><a href="index.html" class="nav-link">Home</a></li>
             <li><a href="about.html" class="nav-link active">About</a></li>
@@ -27,7 +31,7 @@
         <p class="reveal-on-scroll subtitle">Establishing authority and trust.</p>
         
         <div class="bento-grid">
-            <div class="tilt-card reveal-on-scroll" style="grid-column: 1 / -1;">
+            <div class="static-card reveal-on-scroll" style="grid-column: 1 / -1;">
                 <div class="tilt-inner">
                     <h3>Who Am I?</h3>
                     <p>Content coming soon. This section will introduce my background in Crypto Analysis and AI Engineering.</p>
@@ -36,7 +40,13 @@
         </div>
     </div>
 
-    <footer><p>&copy; 2025 You Are AI.</p></footer>
+    <footer>
+        <a href="index.html" class="logo-wrapper">
+            <img src="logo.png" alt="Logo" class="logo-img">
+            <span class="logo-text">You Are AI</span>
+        </a>
+        <p>&copy; 2025 You Are AI.</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>

@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Travel Planner | You Are AI</title>
+    <link rel="icon" href="logo.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* Generator Styling - Dark Mode Adaptation */
+        /* Generator Specific Styling */
         .glass-panel {
-            background-color: rgba(15, 15, 16, 0.8); /* 半透明黑 */
+            background-color: rgba(15, 15, 16, 0.8);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 16px;
@@ -22,15 +23,26 @@
         .input-group label { display: block; margin-bottom: 10px; font-weight: bold; color: var(--accent-color); font-size: 1.05rem; }
         
         /* 輸入框樣式 */
-        .input-group input[type="text"], .input-group select { 
+        .input-group input[type="text"], 
+        .input-group input[type="date"], 
+        .input-group select { 
             width: 100%; padding: 14px; 
             border: 1px solid #333; 
             border-radius: 8px; font-size: 1rem; font-family: inherit; 
             background-color: #1a1a1a; color: white;
             transition: border-color 0.2s; 
+            color-scheme: dark;
         }
         .input-group input:focus, .input-group select:focus { outline: none; border-color: var(--accent-color); }
         
+        /* 自定義輸入框預設隱藏 */
+        .custom-input {
+            display: none;
+            margin-top: 10px;
+            background-color: rgba(59, 130, 246, 0.1) !important;
+            border-color: var(--accent-color) !important;
+        }
+
         .tags-container { display: flex; flex-wrap: wrap; gap: 10px; }
         .tags-container input[type="checkbox"] { display: none; }
         .tag-label { 
@@ -70,13 +82,22 @@
     </div>
 
     <nav class="navbar">
-        <div class="logo">You Are AI</div>
+        <a href="index.html" class="logo-wrapper">
+            <img src="logo.png" alt="You Are AI Logo" class="logo-img">
+            <span class="logo-text">You Are AI</span>
+        </a>
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="updates.html">Updates</a></li>
-            <li><a href="topics.html">Topics</a></li>
-            <li><a href="prompts.html">Library</a></li>
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="insights.html" class="nav-link">Insights</a></li>
+            <li><a href="academy.html" class="nav-link">Academy</a></li>
+            <li><a href="toolbox.html" class="nav-link active">Toolbox</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
         </ul>
+        <div class="nav-actions">
+            <a href="#" class="login-link">Log in</a>
+            <a href="#" class="signup-btn">Join Discord</a>
+        </div>
     </nav>
 
     <div class="container" style="text-align: left; max-width: 800px;">
@@ -88,14 +109,15 @@
         </header>
 
         <article class="glass-panel reveal-on-scroll">
-            <p style="margin-bottom: 20px;">Planning a trip—especially for a group or with family—can be a logistical nightmare. Use this generator to create a professional "Super Prompt" for Gemini.</p>
+            <p style="margin-bottom: 20px;">Stop drowning in research tabs. Select your preferences below to generate a professional "Super Prompt" for Gemini.</p>
             
             <div style="margin-top: 30px;">
                 <h3 style="margin-bottom: 25px; color: white;">✈️ Build Your Itinerary</h3>
                 
                 <div class="input-group">
                     <label>🌍 Destination (Country)</label>
-                    <select id="country-select" onchange="toggleCustomInput('country')">
+                    <select id="country-select" onchange="onCountryChange()">
+                        <option value="" disabled selected>Select a country...</option>
                         <option value="Japan">🇯🇵 Japan</option>
                         <option value="Korea">🇰🇷 Korea</option>
                         <option value="Taiwan">🇹🇼 Taiwan</option>
@@ -103,44 +125,67 @@
                         <option value="UK">🇬🇧 UK</option>
                         <option value="France">🇫🇷 France</option>
                         <option value="USA">🇺🇸 USA</option>
-                        <option value="custom">🏳️ Other (Custom)...</option>
+                        <option value="other" style="font-weight: bold; color: var(--accent-color);">✏️ Other (Type below)...</option>
                     </select>
-                    <input type="text" id="country-custom" style="display:none; margin-top:10px;" placeholder="Enter country name...">
+                    <input type="text" id="country-custom" class="custom-input" placeholder="Type the country name...">
                 </div>
 
                 <div class="input-group">
-                    <label>📍 Specific City (Optional)</label>
-                    <input type="text" id="city" placeholder="e.g., Tokyo, Seoul, London...">
+                    <label>📍 Specific City / Region</label>
+                    <select id="city-select" onchange="toggleCustomInput('city')">
+                        <option value="" disabled selected>Please select a country first...</option>
+                        </select>
+                    <input type="text" id="city-custom" class="custom-input" placeholder="Type specific city...">
+                </div>
+
+                <div class="input-group">
+                    <label>📅 Travel Dates</label>
+                    <div style="display: flex; gap: 15px;">
+                        <div style="flex: 1;">
+                            <span style="font-size: 0.8rem; color: #aaa; display: block; margin-bottom: 5px;">Start Date</span>
+                            <input type="date" id="date-start">
+                        </div>
+                        <div style="flex: 1;">
+                            <span style="font-size: 0.8rem; color: #aaa; display: block; margin-bottom: 5px;">End Date</span>
+                            <input type="date" id="date-end">
+                        </div>
+                    </div>
                 </div>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
                     <div class="input-group">
-                        <label>📅 Duration</label>
-                        <select id="days">
-                            <option value="3 Days">3 Days</option>
-                            <option value="5 Days" selected>5 Days</option>
-                            <option value="7 Days">7 Days</option>
-                            <option value="10 Days">10 Days</option>
+                        <label>💰 Budget</label>
+                        <select id="budget">
+                            <option value="Budget (Low Cost)">Budget (Low Cost)</option>
+                            <option value="Standard (Balanced)" selected>Standard (Balanced)</option>
+                            <option value="Luxury (High End)">Luxury (High End)</option>
                         </select>
                     </div>
                     <div class="input-group">
-                        <label>💰 Budget</label>
-                        <select id="budget">
-                            <option value="Budget">Budget</option>
-                            <option value="Standard" selected>Standard</option>
-                            <option value="Luxury">Luxury</option>
+                        <label>👥 Companions</label>
+                        <select id="who-select" onchange="toggleCustomInput('who')">
+                            <option value="Solo">Solo Traveler</option>
+                            <option value="Couple">Couple</option>
+                            <option value="Family (Kids)">Family with Kids</option>
+                            <option value="Group of Friends">Group of Friends</option>
+                            <option value="other" style="font-weight: bold; color: var(--accent-color);">✏️ Other...</option>
                         </select>
+                        <input type="text" id="who-custom" class="custom-input" placeholder="Describe your group...">
                     </div>
                 </div>
 
                 <div class="input-group">
-                    <label>❤️ Preferences</label>
+                    <label>❤️ Preferences (Multi-select)</label>
                     <div class="tags-container">
                         <label><input type="checkbox" name="pref" value="Local Foodie"> <span class="tag-label">🍜 Foodie</span></label>
                         <label><input type="checkbox" name="pref" value="Photo Spots"> <span class="tag-label">📸 Photos</span></label>
                         <label><input type="checkbox" name="pref" value="Shopping"> <span class="tag-label">🛍️ Shopping</span></label>
-                        <label><input type="checkbox" name="pref" value="History"> <span class="tag-label">🏛️ History</span></label>
+                        <label><input type="checkbox" name="pref" value="History & Museums"> <span class="tag-label">🏛️ History</span></label>
+                        <label><input type="checkbox" name="pref" value="Relaxing / Spa"> <span class="tag-label">🧖‍♀️ Relaxing</span></label>
+                        
+                        <label><input type="checkbox" name="pref" value="other" onchange="toggleOtherPref()"> <span class="tag-label" style="border-style: dashed;">✏️ Other</span></label>
                     </div>
+                    <input type="text" id="pref-custom" class="custom-input" placeholder="Enter custom preferences (e.g., Anime, Hiking, Coffee)...">
                 </div>
 
                 <button onclick="generateTravelPrompt()" class="generate-btn">✨ Generate Prompt</button>
@@ -154,21 +199,80 @@
         </article>
 
         <div style="margin-top: 50px; text-align: center;">
-            <a href="topics.html" class="shimmer-btn">Back to Topics</a>
+            <a href="toolbox.html" class="shimmer-btn">Back to Toolbox</a>
         </div>
 
     </div>
 
     <footer>
-        <p>&copy; 2025 You Are AI. Empowering Humanity.</p>
+        <a href="index.html" class="logo-wrapper">
+            <img src="logo.png" alt="Logo" class="logo-img">
+            <span class="logo-text">You Are AI</span>
+        </a>
+        <p>&copy; 2025 You Are AI.</p>
     </footer>
 
     <script src="script.js"></script>
     <script>
+        // === 資料庫：國家對應城市清單 (純城市名) ===
+        const citiesByCountry = {
+            "Japan": ["Tokyo", "Osaka", "Kyoto", "Hokkaido", "Fukuoka", "Okinawa"],
+            "Korea": ["Seoul", "Busan", "Jeju Island", "Incheon", "Gyeongju"],
+            "Taiwan": ["Taipei", "Kaohsiung", "Taichung", "Tainan", "Hualien"],
+            "Thailand": ["Bangkok", "Phuket", "Chiang Mai", "Pattaya", "Krabi"],
+            "UK": ["London", "Edinburgh", "Manchester", "Liverpool", "Bath"],
+            "France": ["Paris", "Nice", "Lyon", "Bordeaux", "Marseille"],
+            "USA": ["New York City", "Los Angeles", "Las Vegas", "Orlando", "San Francisco", "Miami"],
+            "default": ["Capital City", "Major City", "Coastal Region", "Mountain Region"]
+        };
+
+        // 1. 處理國家改變時的連動邏輯
+        function onCountryChange() {
+            // 先處理是否顯示自定義國家輸入框
+            toggleCustomInput('country');
+
+            // 取得當前選中的國家
+            const countrySelect = document.getElementById('country-select');
+            const citySelect = document.getElementById('city-select');
+            const selectedCountry = countrySelect.value;
+
+            // 清空目前的城市選項
+            citySelect.innerHTML = '<option value="" disabled selected>Select a city...</option>';
+
+            // 決定要用哪一組城市資料
+            let options = [];
+            if (citiesByCountry[selectedCountry]) {
+                options = citiesByCountry[selectedCountry];
+            } else {
+                options = citiesByCountry["default"];
+            }
+
+            // 動態新增城市選項
+            options.forEach(city => {
+                const opt = document.createElement('option');
+                opt.value = city;
+                opt.textContent = city;
+                citySelect.appendChild(opt);
+            });
+
+            // 最後一定要加上 "Other" 選項
+            const otherOpt = document.createElement('option');
+            otherOpt.value = "other";
+            otherOpt.textContent = "✏️ Other (Type specific city)...";
+            otherOpt.style.fontWeight = "bold";
+            otherOpt.style.color = "var(--accent-color)";
+            citySelect.appendChild(otherOpt);
+
+            // 重置城市自定義輸入框 (隱藏)
+            document.getElementById('city-custom').style.display = 'none';
+        }
+
+        // 2. 通用的切換輸入框功能
         function toggleCustomInput(type) {
             const selectElement = document.getElementById(type + '-select');
             const customInput = document.getElementById(type + '-custom');
-            if (selectElement && selectElement.value === 'custom') {
+            
+            if (selectElement.value === 'other') {
                 customInput.style.display = 'block';
                 customInput.focus();
             } else {
@@ -176,26 +280,88 @@
             }
         }
 
+        // 3. 切換 Preferences 的自定義輸入框
+        function toggleOtherPref() {
+            const otherCheckbox = document.querySelector('input[value="other"]');
+            const customInput = document.getElementById('pref-custom');
+
+            if (otherCheckbox.checked) {
+                customInput.style.display = 'block';
+                customInput.focus();
+            } else {
+                customInput.style.display = 'none';
+            }
+        }
+
+        // 4. 生成 Prompt 功能
         function generateTravelPrompt() {
+            // 取得國家
             let country = document.getElementById('country-select').value;
-            if (country === 'custom') country = document.getElementById('country-custom').value;
-            const city = document.getElementById('city').value || country;
-            const duration = document.getElementById('days').value;
+            if (country === 'other' || country === '') country = document.getElementById('country-custom').value || "Destination";
+
+            // 取得城市
+            let city = document.getElementById('city-select').value;
+            if (city === 'other' || city === '') city = document.getElementById('city-custom').value || "Major Cities";
+
+            // 取得同伴
+            let who = document.getElementById('who-select').value;
+            if (who === 'other') who = document.getElementById('who-custom').value || "Travelers";
+
+            // 取得日期
+            const startDate = document.getElementById('date-start').value;
+            const endDate = document.getElementById('date-end').value;
+            let dateText = "Unspecified Dates";
+            if (startDate && endDate) {
+                dateText = `from ${startDate} to ${endDate}`;
+            }
+
             const budget = document.getElementById('budget').value;
             
+            // 取得偏好
             let selectedPrefs = [];
-            document.querySelectorAll('input[name="pref"]:checked').forEach((cb) => selectedPrefs.push(cb.value));
+            document.querySelectorAll('input[name="pref"]:checked').forEach((cb) => {
+                if (cb.value === 'other') {
+                    const customText = document.getElementById('pref-custom').value;
+                    if (customText.trim() !== "") {
+                        selectedPrefs.push(customText);
+                    }
+                } else {
+                    selectedPrefs.push(cb.value);
+                }
+            });
             let prefs = selectedPrefs.length > 0 ? selectedPrefs.join(', ') : "General sightseeing";
 
-            let promptText = `Act as a professional tour guide. Plan a ${duration} trip to ${city} (${country}).\nBudget: ${budget}\nPreferences: ${prefs}\n\nRequirements:\n1. Output as a Markdown Table.\n2. Include Google Maps links for every spot.\n3. Suggest transport options.`;
+            // 組合 Prompt
+            let promptText = `Act as a professional tour guide. Plan a trip to ${city} (${country}) for ${who}.\n\n`;
+            promptText += `**Trip Details:**\n`;
+            promptText += `* **Dates:** ${dateText}\n`;
+            promptText += `* **Budget:** ${budget}\n`;
+            promptText += `* **Preferences:** ${prefs}\n\n`;
+            promptText += `**Requirements:**\n`;
+            promptText += `1. Output as a detailed Markdown Table (Day | Time | Activity | Location Link).\n`;
+            promptText += `2. Include Google Maps links for every spot.\n`;
+            promptText += `3. Suggest transport options fitting the schedule.\n`;
+            promptText += `4. Consider the weather/season for the dates provided.`;
 
             document.getElementById('final-prompt').innerText = promptText;
             document.getElementById('result-box').style.display = 'block';
         }
 
+        // 5. 複製功能
         function copyGeneratedPrompt() {
             const text = document.getElementById('final-prompt').innerText;
-            navigator.clipboard.writeText(text).then(() => { alert("Prompt copied!"); });
+            navigator.clipboard.writeText(text).then(() => { 
+                const btn = document.querySelector("#result-box .copy-btn");
+                const originalText = btn.innerText;
+                btn.innerText = "Copied!";
+                btn.style.backgroundColor = "#4ade80";
+                btn.style.color = "black";
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.backgroundColor = "#333";
+                    btn.style.color = "white";
+                }, 2000);
+            });
         }
     </script>
 </body>
